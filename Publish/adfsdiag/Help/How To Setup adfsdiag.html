@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="LibreOffice 4.1.6.2 (Linux)">
+	<META NAME="AUTHOR" CONTENT="Taparshi Pandit">
+	<META NAME="CREATED" CONTENT="20200229;85500000000000">
+	<META NAME="CHANGEDBY" CONTENT="Taparshi Pandit">
+	<META NAME="CHANGED" CONTENT="20200503;173900000000000">
+	<META NAME="AppVersion" CONTENT="16.0000">
+	<META NAME="DocSecurity" CONTENT="0">
+	<META NAME="HyperlinksChanged" CONTENT="false">
+	<META NAME="LinksUpToDate" CONTENT="false">
+	<META NAME="ScaleCrop" CONTENT="false">
+	<META NAME="ShareDoc" CONTENT="false">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { size: 12.95in 19.02in; margin: 1in }
+		P { margin-bottom: 0.08in; direction: ltr; widows: 2; orphans: 2 }
+		H1 { margin-bottom: 0in; direction: ltr; color: #2f5496; page-break-inside: avoid; widows: 2; orphans: 2 }
+		H1.western { font-family: "Calibri Light", serif; font-size: 16pt; font-weight: normal }
+		H1.cjk { font-size: 16pt; font-weight: normal }
+		H1.ctl { font-family: ; font-size: 16pt; font-weight: normal }
+		H2 { margin-top: 0.03in; margin-bottom: 0in; direction: ltr; color: #2f5496; page-break-inside: avoid; widows: 2; orphans: 2 }
+		H2.western { font-family: "Calibri Light", serif; font-size: 13pt; font-weight: normal }
+		H2.cjk { font-family: "Arial"; font-size: 13pt; font-weight: normal }
+		H2.ctl { font-family: ; font-size: 13pt; font-weight: normal }
+		A:link { color: #0000ff; so-language: zxx }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" LINK="#0000ff" DIR="LTR">
+<H1 CLASS="western">Configure adfsdiag tool in a new environment</H1>
+<H2 CLASS="western">Prerequisites and steps</H2>
+<OL>
+	<LI><P STYLE="margin-bottom: 0.11in">A Windows server machine
+	(physical/virtual) joined to the domain where the target ADFS farm
+	is installed. This machine will act as the web server and will house
+	the ‘adfsdiag’ web tool.</P>
+	<LI><P STYLE="margin-bottom: 0.11in">The computer account of the
+	above-mentioned web server needs to be a local administrator on all
+	target ADFS farm Web Application Proxy and ADFS servers.</P>
+	<LI><P STYLE="margin-bottom: 0.11in">Install the following roles and
+	features on the web server.</P>
+</OL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><IMG SRC="bdf3f3b2db7fa55f69e77b04d70aef23_html_a0e9f16c.png" NAME="Picture 1" ALIGN=BOTTOM WIDTH=554 HEIGHT=378 BORDER=0></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><IMG SRC="bdf3f3b2db7fa55f69e77b04d70aef23_html_5255881f.png" NAME="Picture 2" ALIGN=BOTTOM WIDTH=555 HEIGHT=65 BORDER=0></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><IMG SRC="bdf3f3b2db7fa55f69e77b04d70aef23_html_52827c72.png" NAME="Picture 3" ALIGN=BOTTOM WIDTH=558 HEIGHT=74 BORDER=0></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><BR><BR>
+</P>
+<OL START=4>
+	<LI><P STYLE="margin-bottom: 0.11in">Install Windows Identity
+	Foundation 3.5. ( Important )</P>
+</OL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><BR><BR>
+</P>
+<OL START=5>
+	<LI><P STYLE="margin-bottom: 0.11in">Create an Application pool in
+	IIS as follows 
+	</P>
+</OL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><IMG SRC="bdf3f3b2db7fa55f69e77b04d70aef23_html_4d83b900.png" NAME="Picture 6" ALIGN=BOTTOM WIDTH=459 HEIGHT=362 BORDER=0></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><BR><BR>
+</P>
+<OL START=6>
+	<LI><P STYLE="margin-bottom: 0.11in">Attach an SSL certificate with
+	Default Web site.</P>
+	<LI><P STYLE="margin-bottom: 0.11in">Copy the ‘adfsdiag’ web
+	application folder to C:\inetpub\wwwroot on the web server.
+	.\Publish folder contents may also be used.</P>
+	<LI><P STYLE="margin-bottom: 0.11in">Expand “Default Web site”
+	in IIS, right click the newly added ‘adfsdiag’ folder and choose
+	“convert to application” , select the application pool created
+	earlier ,click ok.</P>
+</OL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><IMG SRC="bdf3f3b2db7fa55f69e77b04d70aef23_html_ad7da3af.png" NAME="Picture 5" ALIGN=BOTTOM WIDTH=230 HEIGHT=285 BORDER=0></P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<OL START=9>
+	<LI><P STYLE="margin-bottom: 0.11in">If you receive error - <FONT COLOR="#ff0000">Failed
+	to update database
+	&quot;C:\INETPUB\WWWROOT\ADFSDIAG\APP_DATA\DATABASE.MDF&quot;
+	because the database is read-only</FONT> while updating the vip
+	table or farm name under configuration page, browse to
+	<FONT COLOR="#ff0000">C:\INETPUB\WWWROOT\ADFSDIAG\APP_DATA </FONT>and
+	provide IIS_ISURS(AppServerName\ IIS_ISURS) , modify permissions on
+	the folder and if needed subsequent database and log files.</P>
+</OL>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<H1 CLASS="western">Appendix 
+</H1>
+<OL>
+	<LI><P STYLE="margin-bottom: 0.11in">Current version is built using
+	VS 2017. .Net framework 4.6.2.</P>
+	<LI><P STYLE="margin-bottom: 0.11in">You may have to instate SNI
+	wildcard bindings on the target Proxy or ADFS servers</P>
+</OL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in">To perform
+wildcard bindings , insert the binding as follows 
+</P>
+<P STYLE="text-indent: 0.5in; margin-top: 0.19in; margin-bottom: 0.19in; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><FONT COLOR="#404040"><FONT FACE="Cambria, serif"><FONT SIZE=2>netsh&nbsp;http
+add&nbsp;sslcert&nbsp;ipport=0.0.0.0:443&nbsp;certhash=fcfc78505073ff9108e6a16e2115ef29255facb3&nbsp;appid='{5d89a20c-beab-4389-9447-324788eb944a}'&nbsp;certstorename=MY</FONT></FONT></FONT></FONT></FONT></P>
+<P STYLE="text-indent: 0.5in; margin-top: 0.19in; margin-bottom: 0.19in; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><FONT COLOR="#404040"><FONT FACE="Cambria, serif"><FONT SIZE=2>Where
+‘fcfc78505073ff9108e6a16e2115ef29255facb3’ is the thumbprint of
+the ADFS Service Communication Certificate.</FONT></FONT></FONT><FONT FACE="Cambria, serif"><FONT SIZE=2>&nbsp;</FONT></FONT></FONT></FONT></P>
+<P STYLE="text-indent: 0.5in; margin-top: 0.19in; margin-bottom: 0.19in; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><FONT COLOR="#404040"><FONT FACE="Cambria, serif"><FONT SIZE=2>and</FONT></FONT></FONT><FONT FACE="Cambria, serif"><FONT SIZE=2>&nbsp;</FONT></FONT></FONT></FONT></P>
+<P STYLE="text-indent: 0.5in; margin-top: 0.19in; margin-bottom: 0.19in; line-height: 100%">
+<FONT FACE="Times New Roman, serif"><FONT SIZE=3><FONT COLOR="#404040"><FONT FACE="Cambria, serif"><FONT SIZE=2>appid='{5d89a20c-beab-4389-9447-324788eb944a}'
+is the value of ‘appid’ returned by ‘netsh&nbsp;http
+show&nbsp;sslcert’</FONT></FONT></FONT><FONT FACE="Cambria, serif"><FONT SIZE=2>&nbsp;</FONT></FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><BR><BR>
+</P>
+<OL START=3>
+	<LI><P STYLE="margin-bottom: 0.11in">The current version uses
+	LocalDb. Please update connection strings as needed and SQL version.</P>
+</OL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in">Examples of code
+behind  – 
+</P>
+<P STYLE="text-indent: 0.5in; margin-bottom: 0in; line-height: 100%"><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">string</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">
+connectionString = </FONT></FONT></FONT><FONT COLOR="#800000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">@&quot;Data
+Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated
+Security=True;User Instance=True&quot;</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">;</FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in; line-height: 100%"><FONT COLOR="#000000">
+   <FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">	</FONT></FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">string</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">
+connectionString = </FONT></FONT></FONT><FONT COLOR="#800000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">@&quot;Data
+Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated
+Security=True&quot;</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">;</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in">Example of
+web.config –</P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in; line-height: 100%"><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&lt;!--</FONT></FONT></FONT><FONT COLOR="#008000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&lt;add
+name=&quot;ApplicationServices&quot; connectionString=&quot;data
+source=.\SQLEXPRESS;Integrated
+Security=SSPI;AttachDBFilename=|DataDirectory|\aspnetdb.mdf;User
+Instance=true&quot; providerName=&quot;System.Data.SqlClient&quot;/&gt;</FONT></FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">--&gt;</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in; line-height: 100%"><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&lt;</FONT></FONT></FONT><FONT COLOR="#a31515"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">add</FONT></FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">
+</FONT></FONT></FONT><FONT COLOR="#ff0000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">name</FONT></FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">=</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&quot;</FONT></FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">ApplicationServices</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&quot;</FONT></FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">
+</FONT></FONT></FONT><FONT COLOR="#ff0000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">connectionString</FONT></FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">=</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&quot;</FONT></FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">Data
+Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated
+Security=True</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&quot;</FONT></FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">
+</FONT></FONT></FONT><FONT COLOR="#ff0000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">providerName</FONT></FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">=</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&quot;</FONT></FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">System.Data.SqlClient</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">&quot;</FONT></FONT></FONT><FONT COLOR="#0000ff"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">/&gt;</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0.11in"><BR><BR>
+</P>
+<OL START=4>
+	<LI><P STYLE="margin-bottom: 0.11in">SQL Table creation queries 
+	</P>
+</OL>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in">CREATE<FONT COLOR="#d4d4d4">&nbsp;</FONT>TABLE<FONT COLOR="#d4d4d4">&nbsp;</FONT><FONT COLOR="#2f5496">vip&nbsp;(</FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><FONT COLOR="#d4d4d4">&nbsp;&nbsp;</FONT><FONT COLOR="#2f5496">id&nbsp;</FONT>int<FONT COLOR="#d4d4d4">&nbsp;</FONT>primary<FONT COLOR="#d4d4d4">&nbsp;</FONT>key<FONT COLOR="#d4d4d4">&nbsp;</FONT>identity<FONT COLOR="#d4d4d4">,</FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><FONT COLOR="#d4d4d4">&nbsp;&nbsp;</FONT>Site<FONT COLOR="#d4d4d4">&nbsp;</FONT>VARCHAR<FONT COLOR="#d4d4d4">&nbsp;</FONT><FONT COLOR="#008000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">(8000)</FONT></FONT></FONT><FONT COLOR="#d4d4d4">&nbsp;</FONT>NOT<FONT COLOR="#d4d4d4">&nbsp;</FONT>NULL<FONT COLOR="#d4d4d4">,</FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><FONT COLOR="#d4d4d4">&nbsp;&nbsp;</FONT><FONT COLOR="#2f5496">VIP&nbsp;</FONT>VARCHAR<FONT COLOR="#d4d4d4">&nbsp;</FONT><FONT COLOR="#008000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">(8000)</FONT></FONT></FONT><FONT COLOR="#d4d4d4">&nbsp;</FONT>NOT<FONT COLOR="#d4d4d4">&nbsp;</FONT>NULL<FONT COLOR="#d4d4d4">,</FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><FONT COLOR="#2f5496">);</FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in">CREATE<FONT COLOR="#d4d4d4">&nbsp;</FONT>TABLE<FONT COLOR="#d4d4d4">&nbsp;</FONT><FONT COLOR="#2f5496">dbo.Configuration</FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><FONT COLOR="#d4d4d4">(&nbsp;</FONT><FONT COLOR="#2f5496">ConfigurationID&nbsp;</FONT>TINYINT<FONT COLOR="#d4d4d4">&nbsp;</FONT>NOT<FONT COLOR="#d4d4d4">&nbsp;</FONT>NULL<FONT COLOR="#d4d4d4">&nbsp;</FONT><FONT COLOR="#2f5496">DEFAULT&nbsp;1,</FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><FONT COLOR="#d4d4d4">&nbsp;</FONT><FONT COLOR="#2f5496">FarmName&nbsp;</FONT>VARCHAR<FONT COLOR="#d4d4d4">&nbsp;</FONT><FONT COLOR="#008000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">(8000),</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><FONT COLOR="#d4d4d4">&nbsp;&nbsp;</FONT>CONSTRAINT<FONT COLOR="#d4d4d4">&nbsp;</FONT><FONT COLOR="#2f5496">Configuration_PK&nbsp;</FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><FONT COLOR="#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;</FONT>PRIMARY<FONT COLOR="#d4d4d4">&nbsp;</FONT>KEY<FONT COLOR="#d4d4d4">&nbsp;(</FONT><FONT COLOR="#2f5496">ConfigurationID</FONT><FONT COLOR="#008000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">),</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><FONT COLOR="#d4d4d4">&nbsp;&nbsp;</FONT>CONSTRAINT<FONT COLOR="#d4d4d4">&nbsp;</FONT><FONT COLOR="#2f5496">Configuration_OnlyOneRow&nbsp;</FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><FONT COLOR="#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;</FONT>CHECK<FONT COLOR="#d4d4d4">&nbsp;</FONT><FONT COLOR="#2f5496">(ConfigurationID&nbsp;</FONT><FONT COLOR="#008000"><FONT FACE="Consolas, serif"><FONT SIZE=2 STYLE="font-size: 9pt">=&nbsp;1)</FONT></FONT></FONT></P>
+<P STYLE="margin-left: 0.5in; margin-bottom: 0in"><FONT COLOR="#2f5496">)&nbsp;;</FONT></P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+<P STYLE="margin-bottom: 0in; line-height: 0.17in"><IMG SRC="bdf3f3b2db7fa55f69e77b04d70aef23_html_f7cfc9b9.jpg" NAME="Picture 4" ALIGN=BOTTOM WIDTH=72 HEIGHT=18 BORDER=0></P>
+<P STYLE="margin-bottom: 0in; line-height: 0.17in"><FONT COLOR="#000000"><FONT SIZE=2>Taparshi
+Pandit</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in; line-height: 0.17in"><A HREF="mailto:tapand@microsoft.com"><FONT COLOR="#0563c1"><FONT FACE="Segoe UI, serif"><FONT SIZE=1 STYLE="font-size: 8pt">tapand@microsoft.com</FONT></FONT></FONT></A></P>
+<P STYLE="margin-bottom: 0.11in"><BR><BR>
+</P>
+</BODY>
+</HTML>

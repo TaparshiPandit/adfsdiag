@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1082
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "adfsdiag", "D:\ADFSDIAGVs2010\adfsdiag\", "{8F71BBF9-830A-4F93-A364-B1CAF0DB1AE5}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.2"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50522"
+		Debug.AspNetCompiler.PhysicalPath = "D:\ADFSDIAGVs2010\adfsdiag\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50522\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50522"
+		Release.AspNetCompiler.PhysicalPath = "D:\ADFSDIAGVs2010\adfsdiag\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50522\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50522"
+		SlnRelativePath = "D:\ADFSDIAGVs2010\adfsdiag\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F71BBF9-830A-4F93-A364-B1CAF0DB1AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F71BBF9-830A-4F93-A364-B1CAF0DB1AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {00681648-C772-431A-8A6E-3877914F9A22}
+	EndGlobalSection
+EndGlobal
